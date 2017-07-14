@@ -1,0 +1,10 @@
+{
+  "generator-mendix": {
+    "promptValues": {
+      "copyright": "flock of birds 2017",
+      "license": "Apache 2",
+      "author": "Conrad G",
+      "boilerplate": "appstore"
+    }
+  }
+}
