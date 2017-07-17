@@ -85,6 +85,11 @@ define([
           logger.debug(this.id + ".enable");
         },
 
+        // mxui.widget._WidgetBase.enable is called when the widget should disable editing. Implement to disable editing if widget is input widget.
+        disable: function () {
+          logger.debug(this.id + ".disable");
+        },
+
         // mxui.widget._WidgetBase.resize is called when the page's layout is recalculated. Implement to do sizing calculations. Prefer using CSS instead.
         resize: function (box) {
           logger.debug(this.id + ".resize");
