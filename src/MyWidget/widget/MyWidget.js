@@ -4,8 +4,8 @@
     ========================
 
     @file      : MyWidget.js
-    @version   : 1.0.0
-    @author    : Conrad G
+    @version   : 0.1.0
+    @author    : CJ
     @date      : 7/10/2017
     @copyright : flock of birds 2017
     @license   : Apache 2
@@ -17,11 +17,9 @@
 
 // Required module list. Remove unnecessary modules, you can always get them back from the boilerplate.
 define([
-    //to be able to create a dijit widget,these 3 files are needed
     "dojo/_base/declare",
     "mxui/widget/_WidgetBase",
     "dijit/_TemplatedMixin",
-    //thses files(extra dojo and mendix functionality) are needed to be able to create and alter html and javascript events
     "mxui/dom",
     "dojo/dom",
     "dojo/dom-style",
@@ -31,7 +29,6 @@ define([
     "dojo/text",
     "dojo/html",
     "dojo/_base/event",
-    //these two files are external libraries. dojo/text can help you load in any html and css templates used in the custom widget
     "MyWidget/lib/jquery-1.11.2",
     "dojo/text!MyWidget/widget/template/MyWidget.html"
 ], function (declare, _WidgetBase, _TemplatedMixin, dom, dojoDom, dojoStyle,
@@ -47,6 +44,9 @@ define([
 
             // DOM elements
             reverse: null,
+            
+            //parameters configured in the modeler
+            textString: "",
 
             // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
             _handles: null,
@@ -67,7 +67,6 @@ define([
                     this._readOnly = true;
                 }
                 this._updateRendering();
-               // this._setupEvents();
             },
 
             // mxui.widget._WidgetBase.update is called when context is changed or initialized. Implement to re-render and / or fetch data.
@@ -75,12 +74,7 @@ define([
                 logger.debug(this.id + ".update");
                 this._contextObject = objct;
                 this._resetSubscriptions();
-                this._updateRendering(callback); // We're passing the callback to updateRendering to be called after DOM-manipulation
-            },
-
-            // mxui.widget._WidgetBase.enable is called when the widget should enable editing. Implement to enable editing if widget is input widget.
-            enable: function () {
-                logger.debug(this.id + ".enable");
+                this._updateRendering(callback);
             },
 
             // mxui.widget._WidgetBase.resize is called when the page's layout is recalculated. Implement to do sizing calculations. Prefer using CSS instead.
@@ -102,10 +96,10 @@ define([
                 }
             },
 
-            reverseText: function (string) {
+            reverseText: function (strng) {
                 var newString = "";
-                for (var i = string.length - 1; i >= 0; i--) {
-                    newString += string[i];
+                for (var i = strng.length - 1; i >= 0; i--) {
+                    newString += strng[i];
                 }
                 return newString;
             },
