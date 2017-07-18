@@ -6,14 +6,14 @@
     <icon />
 
     <properties>
-        
-        <property key="mfToExecute" type="microflow" required="false" defaultValue="">
-            <caption>Microflow</caption>
+        <property key="textString" type="attribute">
+            <caption>Text</caption>
             <category>Behavior</category>
-            <description>The microflow to execute on click.</description>
-            <returnType type="Boolean" />
+            <description>The text string used by the widget.</description>
+            <attributeTypes>
+                <attributeType name="String" />
+            </attributeTypes>
         </property>
-        
     </properties>
 </widget>
 

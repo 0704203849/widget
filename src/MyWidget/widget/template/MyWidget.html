@@ -1,8 +1,11 @@
 <div class="widgetname">
     <form>
-        <input type="text" data-dojo-attach-point="reverse">
-        <input type="button" data-dojo-attach-event="onClick: reversefunction" value="Reverse">
+        <!--<input type="text" data-dojo-attach-point="reverse">
+        <input type="button" data-dojo-attach-event="onClick: reversefunction" value="Reverse">-->
+        <div class="input-group" data-dojo-attach-point="inputNodes">
+            <!--<input type="text" class="form-control" data-dojo-attach-point="reverse">-->
+            <div class="input-group-addon"><input type="button" data-dojo-attach-event="onClick: reversefunction" value="Reverse" />
+        </div>
     </form> 
-    <div class="widgetname-infoTextNode" data-dojo-attach-point="infoTextNode" />
+    <div class="widgetname-infoTextNode" data-dojo-attach-point="reverse" />
 </div>
-

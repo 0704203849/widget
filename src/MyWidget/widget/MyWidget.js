@@ -127,7 +127,9 @@ define([
             logger.debug(this.id + "._updateRendering");
              if (this._contextObj !== null) {
                 dojoStyle.set(this.domNode, "display", "block");
-               dojoHtml.set(this.infoTextNode, this.messageString);
+                var dataValue = this._contextObj.get(this.textString);
+                this.reverse.value = dataValue;    
+                dojoHtml.set(this.reverse, dataValue);
             } else {
                 dojoStyle.set(this.domNode, "display", "none");
             }
