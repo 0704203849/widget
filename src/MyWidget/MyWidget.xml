@@ -6,13 +6,24 @@
     <icon />
 
     <properties>
-        <property key="textString" type="attribute">
+        <property key="textString" type="attribute" entityProperty="UserInputEntity">
             <caption>Text</caption>
             <category>Behavior</category>
             <description>The text string used by the widget.</description>
             <attributeTypes>
                 <attributeType name="String" />
             </attributeTypes>
+        </property>
+        <property key="mfToExecute" type="microflow" required="false" defaultValue="">
+            <caption>Microflow</caption>
+            <category>Behavior</category>
+            <description>The microflow to execute on leave of text box.</description>
+            <returnType type="Boolean" />
+        </property>
+        <property key="UserInputEntity" type="entity" required="false">
+            <caption>Entity</caption>
+            <category>Data Source</category>
+            <description>The enity whose data is reversed.</description>
         </property>
     </properties>
 </widget>

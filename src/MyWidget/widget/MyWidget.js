@@ -42,11 +42,14 @@ define([
             // _TemplatedMixin will create our dom node using this HTML template.
             templateString: widgetTemplate,
 
-            // DOM elements
+            // DOM elements from the html file
             reverse: null,
-            
-            //parameters configured in the modeler
+            saveObj: null,
+
+            //parameters configured in the modeler from the xml file.
             textString: "",
+            UserInputEntity: "",
+            mfToExecute: "",
 
             // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
             _handles: null,
@@ -118,6 +121,33 @@ define([
                 this._clearValidations();
                 // The callback, coming from update, needs to be executed, to let the page know it finished rendering
                 this._executeCallback(callback, "_updateRendering");
+            },
+
+            SaveString: function (object) {
+                mx.data.commit({
+                    mxobj: object,
+                    callback: function () {
+                        console.log("Object committed");
+                    },
+                    error: function (e) {
+                        console.log("Error occurred attempting to commit: " + e);
+                    }
+
+                });
+            },
+
+            CreateObj: function () {
+                mx.data.create({
+                    entity: this.UserInputEntity,
+                    callback: function (obj) {
+                        obj.set(this.saveObj, this.textString.value)
+                        this.saveTag(obj)
+                        console.log("Object created on server");
+                    },
+                    error: function (e) {
+                        console.log("an error occured: " + e);
+                    }
+                });
             },
 
             // Clear validations.
