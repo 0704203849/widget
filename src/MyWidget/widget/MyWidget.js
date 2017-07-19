@@ -49,7 +49,7 @@ define([
             //parameters configured in the modeler from the xml file.
             textString: "",
             UserInputEntity: "",
-            mfToExecute: "",
+            MicroflowToExecute: "",
 
             // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
             _handles: null,
@@ -89,14 +89,6 @@ define([
             uninitialize: function () {
                 logger.debug(this.id + ".uninitialize");
                 // Clean up listeners, helper objects, etc. There is no need to remove listeners added with this.connect / this.subscribe / this.own.
-            },
-
-            // We want to stop events on a mobile device
-            _stopBubblingEventOnMobile: function (e) {
-                logger.debug(this.id + "._stopBubblingEventOnMobile");
-                if (typeof document.ontouchstart !== "undefined") {
-                    dojoEvent.stop(e);
-                }
             },
 
             reverseText: function (strng) {
@@ -139,15 +131,43 @@ define([
             CreateObj: function () {
                 mx.data.create({
                     entity: this.UserInputEntity,
-                    callback: function (obj) {
-                        obj.set(this.saveObj, this.textString.value)
-                        this.saveTag(obj)
+                    callback: lang.hitch(this, function (obj) {
+                        obj.set(this.textString, this.saveObj.value);
+                        this.SaveString(obj);
                         console.log("Object created on server");
-                    },
+                    }),
                     error: function (e) {
                         console.log("an error occured: " + e);
                     }
                 });
+            },
+
+            useMicroflow: function(){
+                 if (this.MicroflowToExecute !== "") {
+                    this._executeMf(this.MicroflowToExecute, this._contextObject.getGuid());
+                }
+            },
+
+            _executeMf: function (microflow, guid, calback) {
+                logger.debug(this.id + "._executeMf");
+                if (microflow && guid) {
+
+                    mx.ui.action(microflow, {
+                        params: {
+                            applyto: "selection",
+                            guids: [guid]
+                        },
+                        callback: lang.hitch(this, function (objs) {
+                            if (calback && typeof calback === "function") {
+                                calback(objs);
+                            }
+                        }),
+                        error: function (error) {
+                            mx.ui.error("Error executing microflow " + microflow + " : " + error.message);
+                            console.error(this.id + "._executeMf", error);
+                        }
+                    }, this);
+                }
             },
 
             // Clear validations.

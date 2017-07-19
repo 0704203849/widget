@@ -1,9 +1,9 @@
 <div class="widgetname">
     <form>
-        <!--<input type="text" data-dojo-attach-point="reverse">
-        <input type="button"  data-dojo-attach-event="onClick: reversefunction" value="Reverse">-->
-        <div class="input-group" data-dojo-attach-point="inputNodes">
-            <input type="text" class="form-control" data-dojo-attach-point="saveObj">
+        <div class="form-group" data-dojo-attach-point="inputNodes">
+            <input type="text" class="form-control" data-dojo-attach-point="saveObj" data-dojo-attach-event= "onmouseleave: useMicroflow">
+        </div>
+        <div class= "form-group" data-dojo-attach-point="inputNodes">
             <input type="button" value="Save" data-dojo-attach-event= "onClick: CreateObj">
         </div>
     </form> 

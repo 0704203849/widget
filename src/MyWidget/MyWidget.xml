@@ -14,7 +14,7 @@
                 <attributeType name="String" />
             </attributeTypes>
         </property>
-        <property key="mfToExecute" type="microflow" required="false" defaultValue="">
+        <property key="MicroflowToExecute" type="microflow" required="false">
             <caption>Microflow</caption>
             <category>Behavior</category>
             <description>The microflow to execute on leave of text box.</description>
@@ -27,4 +27,3 @@
         </property>
     </properties>
 </widget>
-
