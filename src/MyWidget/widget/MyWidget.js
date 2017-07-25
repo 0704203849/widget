@@ -109,7 +109,6 @@ define([
                 } else {
                     dojoStyle.set(this.domNode, "display", "none");
                 }
-                // Important to clear all validations!
                 this._clearValidations();
                 // The callback, coming from update, needs to be executed, to let the page know it finished rendering
                 this._executeCallback(callback, "_updateRendering");
@@ -128,7 +127,7 @@ define([
                 });
             },
 
-            CreateObj: function () {
+            CreateString: function () {
                 mx.data.create({
                     entity: this.UserInputEntity,
                     callback: lang.hitch(this, function (obj) {
@@ -151,7 +150,6 @@ define([
             _executeMf: function (microflow, guid, calback) {
                 logger.debug(this.id + "._executeMf");
                 if (microflow && guid) {
-
                     mx.ui.action(microflow, {
                         params: {
                             applyto: "selection",
@@ -170,14 +168,12 @@ define([
                 }
             },
 
-            // Clear validations.
             _clearValidations: function () {
                 logger.debug(this.id + "._clearValidations");
                 dojoConstruct.destroy(this._alertDiv);
                 this._alertDiv = null;
             },
 
-            // Reset subscriptions.
             _resetSubscriptions: function () {
                 logger.debug(this.id + "._resetSubscriptions");
                 // Release handles on previous object, if any.
@@ -212,5 +208,4 @@ define([
             }
         });
     });
-
 require(["MyWidget/widget/MyWidget"]);
